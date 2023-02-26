@@ -8,7 +8,7 @@ con <- dbConnect(odbc::odbc(),
                  server = "G-PJ150",
                  database = "AdventureWorks2019",
                  uid = "sa",
-                 pwd = "8901pauL!")
+                 pwd = "\ !")
 
 # Read the SQL query from the file and combine the lines into a single string
 sql_file <- "C:/Users/user/Documents/SQL Server Management Studio/SQLQuery4.sql"
@@ -22,6 +22,7 @@ results <- dbGetQuery(con, "SELECT * FROM Sales.SalesPerson")
 dbDisconnect(con)
 #Save output as csv on local drive
 write.csv(results, file = "C:/Users/user/Documents/SQL Server Management Studio/SQLQuer23.csv", row.names = FALSE)
+
 #view data frame in R
 results
 
