@@ -1,0 +1,27 @@
+#R CODE TO RUN SQL QUERRY ON R ,CONNECT WITH A SERVER DATABASE AND SAVE OUTPUT ON LOCAL FILE AS CSV
+
+library(odbc) # INSTALL AND USE PACKAGE odbc
+
+# Establish a connection to the AdventureWorks database
+con <- dbConnect(odbc::odbc(),
+                 driver = "SQL Server",
+                 server = "G-PJ150",
+                 database = "AdventureWorks2019",
+                 uid = "sa",
+                 pwd = "8901pauL!")
+
+# Read the SQL query from the file and combine the lines into a single string
+sql_file <- "C:/Users/user/Documents/SQL Server Management Studio/SQLQuery4.sql"
+sql_text <- readLines(sql_file, warn = FALSE)
+sql_query <- paste(sql_text, collapse = " ")
+
+# Execute the SQL query and retrieve the results
+results <- dbGetQuery(con, "SELECT * FROM Sales.SalesPerson")
+
+# Disconnect from the database
+dbDisconnect(con)
+#Save output as csv on local drive
+write.csv(results, file = "C:/Users/user/Documents/SQL Server Management Studio/SQLQuer23.csv", row.names = FALSE)
+#view data frame in R
+results
+
